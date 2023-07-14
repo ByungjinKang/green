@@ -1,76 +1,31 @@
+ # 내가 그린 Green 그림
 
-# 개발툴 설치
+<img width="1470" alt="스크린샷 2023-07-04 오후 1 53 00" src="https://github.com/junseokeee/Game-with-JAVA-OpenAPI/assets/88473134/7eea5714-2daa-4bbd-b525-a87781f40b3b">
+<img width="1470" alt="스크린샷 2023-07-04 오후 1 53 14" src="https://github.com/junseokeee/Game-with-JAVA-OpenAPI/assets/88473134/560dd19f-0142-4829-bbbb-e38c2fab0ada">
+
+<br/>
+
+ - 단어 배열에서 10개의 값 추출
+ - 10개의 값에서 3개의 단어 추출
+ - 3개의 단어를 Papago API 사용해 번역(Karlo API가 영문만 지원)
+ - 번역된 단어를 Karlo API에 전달
+ - 전달받은 단어로 이미지 생성
+ - 추출된 10개의 단어에서 이미지를 보고 3개의 단어를 유추
+ - 정답을 맞히면 카운트가 올라감
+   
+<br/>
+
+# Papago API
+ - 파파고의 인공 신경망 기반 기계 번역 기술(NMT, Neural Machine Translation)로 텍스트를 번역한 결과를 반환하는 RESTful API
+
+<br/>
+
+# Karlo API
+ - 요청: image 파라미터에 이미지 파일 Base64 인코딩한 값 전달
+ - 응답: image 값을 Base64 디코딩 후 웹에서 이미지 출력
+
+<br/>
+
+# 개발툴 환경
  - JDK 1.8+
  - IntelliJ Community Edition(or Eclipse)
-<br/>
-
-# 샘플소스 불러오기
- - File > New > Project from version control...
-    - Repository Url
-        - version control : git
-        - Url : https://github.com/oyslala/one.git
-        - Directory : 설치할 디렉토리 선택
-<br/>
-
-# Rest API 호출하여 hello world 실행
- - MainController.java 
- - http://localhost:8080/hello?name=world 호출
- - 스웨거로 확인 ( http://localhost:8080/swagger-ui.html )
-     ```
-     @GetMapping("/hello")
-     @ResponseBody
-     public String helloName(@RequestParam String name) {
-         return "Hello " + name;
-     }
-     ```
- - HTTP Method에 대한 이해 : 
-    - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
-    - @RequestParam, @PathVariable, @RequestBody, @ModelAttribute
-<br/>
-
-# 데이타생성
- - 데이타베이스 설치 (postgres)
- - 테이블생성 
-    ```
-    CREATE TABLE tb_color (
-      color_id character varying(100) PRIMARY KEY,
-      color_name character varying(100) NOT NULL
-    );
-    ```
-<br/>
-
-# Rest API 호출하여 tb_color 테이블 CRUD
- - MainController.java, MainService.java, mainSQL.xml 파일 확인
- - CRUD
-    ```
-    @PostMapping("/insertColor")
-    @ResponseBody
-    public String insertColor(@RequestBody Color color) {
-        mainService.insertColor(color);
-        return "Insert OK";
-    }
-
-    @PostMapping("/updateColor")
-    @ResponseBody
-    public String updateColor(@RequestBody Color color) {
-        mainService.updateColor(color);
-        return "Update OK";
-    }
-
-    @GetMapping("/selectColor/{colorId}")
-    @ResponseBody
-    //public Color selectColor(@RequestParam String colorId) {
-    public Color selectColor(@PathVariable String colorId) {
-        Color color = mainService.selectColor(colorId);
-        return color;
-    }
-
-    @DeleteMapping("/deleteColor")
-    @ResponseBody
-    public String deleteColor(@RequestParam String colorId) {
-        mainService.deleteColor(colorId);
-        return "Delete OK";
-    }
-    ```
-
-    
